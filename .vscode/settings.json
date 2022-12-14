@@ -1,0 +1,24 @@
+{
+  "sqltools.useNodeRuntime": true,
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "pcweb",
+      "database": "movie_reviews",
+      "username": "root",
+      "password": "password"
+    },
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "pcweb5",
+      "database": "${workspaceFolder:pcweb5-api}/tinkergram.db"
+    }
+  ]
+}
