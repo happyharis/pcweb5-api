@@ -5,16 +5,12 @@ import sqlite3 from "sqlite3";
 const app = express();
 const sqlite = sqlite3.verbose();
 
-const db = new sqlite.Database(
-  "./tinkergram.db",
-  sqlite.OPEN_READWRITE,
-  console.error
-);
+const db = new sqlite.Database("./tinkergram.db", sqlite.OPEN_READWRITE);
 
 app.use(json());
 
 const sql = `
-CREATE TABLE posts (
+CREATE TABLE if not exists posts (
   id integer primary key AUTOINCREMENT,
   caption varchar(255) not null,
   image varchar(255) not null
@@ -27,8 +23,8 @@ db.run(sql, (err) => {
 
 function addNote(caption, image) {
   const sql = `insert into posts (caption, image) values (?,?)`;
-  db.sql(sql, [caption, image], (err) => {
-    if (err) console.log(err);
+  db.run(sql, [caption, image], (err) => {
+    if (err) console.log("addNote error:", err);
   });
 }
 
